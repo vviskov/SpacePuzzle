@@ -1,0 +1,16 @@
+#homeScreen {
+	-fx-background-color: #8c0a91;
+}
+
+#homeTitle {
+	-fx-text-fill: #fff;
+	-fx-font-size: 100px;
+	-fx-font-weight: bold;
+}
+
+#btnStart {
+	-fx-font-size: 50px;
+	-fx-padding: 10px 20px;
+	-fx-background-color: #fff;
+	-fx-font-weight: bold;
+}
