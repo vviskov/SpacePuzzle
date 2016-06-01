@@ -14,3 +14,7 @@
 	-fx-background-color: #fff;
 	-fx-font-weight: bold;
 }
+
+#piece1 {
+	-fx-background-color: blue;
+}

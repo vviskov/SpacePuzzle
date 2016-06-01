@@ -25,11 +25,11 @@ public class HomeController {
 
         FXMLLoader myLoader = new FXMLLoader(getClass().getResource("GameScreen.fxml"));
         Parent root = myLoader.load();
+        mainStage.setScene(new Scene(root, 1920, 1080));
+        mainStage.show();
         GameController controller = (GameController) myLoader.getController();
         controller.start();
 
-        mainStage.setScene(new Scene(root, 1200, 900));
-        mainStage.show();
     }
 
 
