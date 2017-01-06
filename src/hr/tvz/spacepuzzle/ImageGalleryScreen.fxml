@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane fx:id="imageGalleryPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hr.tvz.spacepuzzle.ImageGalleryController">
+   <children>
+      <ListView fx:id="imageBrowser" layoutX="1320.0" prefHeight="1080.0" prefWidth="600.0" stylesheets="@style.css" />
+      <ImageView fx:id="imagePreview" fitHeight="720.0" fitWidth="1200.0" layoutX="60.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true" />
+
+      <Button fx:id="btnEasy" alignment="CENTER" contentDisplay="CENTER" layoutX="530.0" layoutY="930.0" mnemonicParsing="false" onAction="#onClickBtnMediumStart" text="SREDNJE" textAlignment="CENTER" />
+      <Button fx:id="btnMedium" alignment="CENTER" contentDisplay="CENTER" layoutX="100.0" layoutY="930.0" mnemonicParsing="false" onAction="#onClickBtnEasyStart" text="LAGANO" textAlignment="CENTER" />
+      <Button fx:id="btnHard" alignment="CENTER" contentDisplay="CENTER" layoutX="1000.0" layoutY="930.0" mnemonicParsing="false" onAction="#onClickBtnHardStart" text="TEŠKO" textAlignment="CENTER" />
+   </children>
+</Pane>

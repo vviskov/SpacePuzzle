@@ -32,9 +32,9 @@ public class GameController {
     private int numCols;
     private int numRows;
 
-    public void start() {
+    public void start(String imagePath) {
 
-        Image originalImage = new Image("hr/tvz/spacepuzzle/image1.png");
+        Image originalImage = new Image(imagePath);
         //Image originalImage = new Image("http://www.unoosa.org/res/timeline/index_html/space-2.jpg");
         mainImage.setImage(originalImage);
 

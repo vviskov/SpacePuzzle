@@ -11,7 +11,8 @@
 #btnEasy, #btnMedium, #btnHard {
 	-fx-font-size: 50px;
 	-fx-padding: 10px 20px;
-	-fx-background-color: #fff;
+	-fx-background-color: #8c0a91;
+	-fx-text-fill: #fff;
 	-fx-font-weight: bold;
 }
 
