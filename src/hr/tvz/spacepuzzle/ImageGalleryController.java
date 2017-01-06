@@ -67,7 +67,7 @@ public class ImageGalleryController {
         GameController controller = (GameController) myLoader.getController();
         controller.setNumCols(cols);
         controller.setNumRows(rows);
-        controller.start(imagePath);
+        controller.start(mainStage, imagePath);
 
     }
 

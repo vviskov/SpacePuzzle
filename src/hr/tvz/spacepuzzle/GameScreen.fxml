@@ -10,5 +10,7 @@
    <children>
       <ImageView fx:id="mainImage" fitHeight="141.0" fitWidth="250.0" layoutX="1619.0" layoutY="25.0" nodeOrientation="INHERIT" pickOnBounds="true" />
       <GridPane fx:id="mainGrid" gridLinesVisible="true" layoutX="610.0" layoutY="251.0" prefHeight="675.0" prefWidth="1200.0"> </GridPane>
+      <ToggleButton fx:id="btnSoundMute" layoutX="14.0" layoutY="1041.0" mnemonicParsing="false" text="Mute Sound" />
+      <Button fx:id="btnReturn" layoutX="202.0" layoutY="1041.0" mnemonicParsing="false" onAction="#onBtnReturnHome" text="Početak" />
    </children>
 </Pane>

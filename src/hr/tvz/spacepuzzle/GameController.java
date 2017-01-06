@@ -1,16 +1,25 @@
 package hr.tvz.spacepuzzle;
 
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
-import javafx.scene.control.Label;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelReader;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Paint;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.stage.Stage;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -29,10 +38,28 @@ public class GameController {
     @FXML
     private GridPane mainGrid;
 
+    @FXML
+    private ToggleButton btnSoundMute;
+
     private int numCols;
     private int numRows;
 
-    public void start(String imagePath) {
+    private MediaPlayer wrongSound;
+    private MediaPlayer correctSound;
+    private Stage mainStage;
+
+    public void start(Stage mainStage, String imagePath) {
+        this.mainStage = mainStage;
+
+        try {
+            String wrongSoundUri = GameController.class.getResource("sounds/wrong.mp3").toURI().toString();
+            String correctSoundUri = GameController.class.getResource("sounds/correct.mp3").toURI().toString();
+            wrongSound = new MediaPlayer(new Media(wrongSoundUri));
+            correctSound = new MediaPlayer(new Media(correctSoundUri));
+        } catch (Exception e) {
+            System.out.println("Fail to load sound. Sounds disabled.");
+            e.printStackTrace();
+        }
 
         Image originalImage = new Image(imagePath);
         //Image originalImage = new Image("http://www.unoosa.org/res/timeline/index_html/space-2.jpg");
@@ -121,25 +148,36 @@ public class GameController {
                     pane.getChildren().add(piece.createImageView());
                     ((Group) activeImage.getParent()).getChildren().remove(activeImage);
                     activeImage.setMouseTransparent(true);
+                    if( correctSound != null && !btnSoundMute.isSelected() ) {
+                        correctSound.seek(correctSound.getStartTime());
+                        correctSound.play();
+                    }
+                }else {
+                    if( wrongSound != null && !btnSoundMute.isSelected() ) {
+                        wrongSound.seek(wrongSound.getStartTime());
+                        wrongSound.play();
+                    }
                 }
             }
         });
         mainGrid.add(pane, colIndex, rowIndex);
     }
 
-    public int getNumCols() {
-        return numCols;
-    }
-
     public void setNumCols(int numCols) {
         this.numCols = numCols;
     }
 
-    public int getNumRows() {
-        return numRows;
-    }
-
     public void setNumRows(int numRows) {
         this.numRows = numRows;
+    }
+
+    public void onBtnReturnHome(ActionEvent actionEvent) throws IOException {
+
+        FXMLLoader myLoader = new FXMLLoader(getClass().getResource("HomeScreen.fxml"));
+        Parent root = myLoader.load();
+        mainStage.setScene(new Scene(root, 1920, 1080));
+        mainStage.show();
+        HomeController controller = (HomeController) myLoader.getController();
+        controller.start(mainStage);
     }
 }
