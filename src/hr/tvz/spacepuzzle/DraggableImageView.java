@@ -25,7 +25,7 @@ public class DraggableImageView extends ImageView {
         setOnMousePressed(event -> {
             mouseX = event.getSceneX();
             mouseY = event.getSceneY();
-            System.out.println("transparent true");
+//            System.out.println("transparent true");
             this.setMouseTransparent(true);
             ChunkInfo.activePiece = piece;
             ChunkInfo.activeImageView = this;
@@ -41,7 +41,7 @@ public class DraggableImageView extends ImageView {
 
         setOnMouseReleased(event -> {
             Platform.runLater(() -> {
-                System.out.println("transparent false");
+//                System.out.println("transparent false");
                 ChunkInfo.activePiece = null;
                 ChunkInfo.activeImageView = null;
                 this.setMouseTransparent(false);

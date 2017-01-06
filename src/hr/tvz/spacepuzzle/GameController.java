@@ -29,6 +29,9 @@ public class GameController {
     @FXML
     private GridPane mainGrid;
 
+    private int numCols;
+    private int numRows;
+
     public void start() {
 
         Image originalImage = new Image("hr/tvz/spacepuzzle/image1.png");
@@ -36,8 +39,6 @@ public class GameController {
         mainImage.setImage(originalImage);
 
         mainGrid.setGridLinesVisible(true);
-        int numCols = 5;
-        int numRows = 5;
 
         for (int i = 0; i < numCols; i++) {
             ColumnConstraints colConstraints = new ColumnConstraints();
@@ -60,15 +61,15 @@ public class GameController {
         PixelReader reader = originalImage.getPixelReader();
         List<PuzzlePiece> chunkList = new ArrayList<>();
 
-        int width = (int) (originalImage.getWidth() / 5);
-        int height = (int) (originalImage.getHeight() / 5);
+        int width = (int) (originalImage.getWidth() / numCols);
+        int height = (int) (originalImage.getHeight() / numRows);
 
-        for (int j = 0; j <= 4; j++) {
-            for (int i = 0; i <= 4; i++) {
+        for (int j = 0; j <= numCols-1; j++) {
+            for (int i = 0; i <= numRows-1; i++) {
                 int x = i * width;
                 int y = j * height;
                 WritableImage chunk = new WritableImage(reader, x, y, width, height);
-                chunkList.add(new PuzzlePiece(5 * j + i, chunk));
+                chunkList.add(new PuzzlePiece(numCols * j + i, chunk));
             }
         }
 
@@ -77,24 +78,29 @@ public class GameController {
         double y = 0;
         double x = 0;
         int correction = 0;
+
+        int puzzlePieceWidth = 1200 / numCols;
+        int puzzlePieceHeight = 720 / numRows;
+        double puzzlePieceScale = 0.7;
+        int puzzlePiecePadding = 5;
+
         for (int i = 0; i < chunkList.size(); i++) {
             PuzzlePiece puzzlePiece = chunkList.get(i);
-            puzzlePiece.setSize(240, 135);
+            puzzlePiece.setSize(puzzlePieceWidth, puzzlePieceHeight);
             DraggableImageView imageView = new DraggableImageView(puzzlePiece);
             imageView.setCache(true);
-            imageView.setFitWidth(180);
-            imageView.setFitHeight(101);
+            imageView.setFitWidth(puzzlePieceWidth * puzzlePieceScale);
+            imageView.setFitHeight(puzzlePieceHeight * puzzlePieceScale);
 
-            if (i % 3 == 0 && i != 0) {
-                y += 110;
+            int rowScale = (numCols == 3 || numCols == 4) ? 2 : 3;
+            if (i % rowScale == 0 && i != 0) {
+                y += Math.floor(puzzlePieceHeight * puzzlePieceScale) + puzzlePiecePadding;
                 x = 0;
-                correction += 3;
+                correction += rowScale;
             }
 
-            Label label = new Label(puzzlePiece.getPosition().toString());
-            label.setTextFill(Paint.valueOf("blue"));
-            Group group = new Group(imageView, label);
-            x = 190 * (i - correction);
+            Group group = new Group(imageView);
+            x = (Math.floor(puzzlePieceWidth * puzzlePieceScale)+ puzzlePiecePadding) * (i - correction);
             group.relocate(x, y);
 
             mainPane.getChildren().add(group);
@@ -104,15 +110,14 @@ public class GameController {
 
     private void addPane(int colIndex, int rowIndex, int numCols) {
         Pane pane = new Pane();
-        pane.setMaxSize(240, 135);
-        pane.setMinSize(240, 135);
+        pane.setMaxSize(1200/numCols, 720/numRows);
+        pane.setMinSize(1200/numCols, 720/numRows);
         pane.setOnMouseEntered(e -> {
             PuzzlePiece piece = ChunkInfo.activePiece;
             DraggableImageView activeImage = ChunkInfo.activeImageView;
             if (piece != null) {
-                System.out.printf("Mouse enetered cell [%d, %d], %d %n", colIndex, rowIndex, piece.getPosition());
+//                System.out.printf("Mouse enetered cell [%d, %d], %d %n", colIndex, rowIndex, piece.getPosition());
                 if(piece.getPosition() == (rowIndex * numCols + colIndex)) {
-                    System.out.println("jeeej");
                     pane.getChildren().add(piece.createImageView());
                     ((Group) activeImage.getParent()).getChildren().remove(activeImage);
                     activeImage.setMouseTransparent(true);
@@ -122,4 +127,19 @@ public class GameController {
         mainGrid.add(pane, colIndex, rowIndex);
     }
 
+    public int getNumCols() {
+        return numCols;
+    }
+
+    public void setNumCols(int numCols) {
+        this.numCols = numCols;
+    }
+
+    public int getNumRows() {
+        return numRows;
+    }
+
+    public void setNumRows(int numRows) {
+        this.numRows = numRows;
+    }
 }

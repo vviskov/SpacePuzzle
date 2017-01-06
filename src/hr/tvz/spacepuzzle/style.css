@@ -4,12 +4,19 @@
 
 #homeTitle {
 	-fx-text-fill: #fff;
-	-fx-font-size: 100px;
+	-fx-font-size: 110px;
 	-fx-font-weight: bold;
 }
 
-#btnStart {
+#btnEasy, #btnMedium, #btnHard {
 	-fx-font-size: 50px;
+	-fx-padding: 10px 20px;
+	-fx-background-color: #fff;
+	-fx-font-weight: bold;
+}
+
+#btnLoadImage {
+	-fx-font-size: 40px;
 	-fx-padding: 10px 20px;
 	-fx-background-color: #fff;
 	-fx-font-weight: bold;
