@@ -102,14 +102,15 @@ public class GameController {
 
         Collections.shuffle(chunkList);
 
-        double y = 0;
-        double x = 0;
-        int correction = 0;
 
         int puzzlePieceWidth = 1200 / numCols;
         int puzzlePieceHeight = 720 / numRows;
         double puzzlePieceScale = 0.7;
         int puzzlePiecePadding = 5;
+
+        double y = puzzlePiecePadding;
+        double x = 0;
+        int correction = 0;
 
         for (int i = 0; i < chunkList.size(); i++) {
             PuzzlePiece puzzlePiece = chunkList.get(i);
@@ -127,7 +128,7 @@ public class GameController {
             }
 
             Group group = new Group(imageView);
-            x = (Math.floor(puzzlePieceWidth * puzzlePieceScale)+ puzzlePiecePadding) * (i - correction);
+            x = (Math.floor(puzzlePieceWidth * puzzlePieceScale)+ puzzlePiecePadding) * (i - correction) + puzzlePiecePadding;
             group.relocate(x, y);
 
             mainPane.getChildren().add(group);

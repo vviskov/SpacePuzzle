@@ -7,7 +7,7 @@
 
 <Pane fx:id="homeScreen" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hr.tvz.spacepuzzle.HomeController">
    <children>
-      <Label fx:id="homeTitle" layoutX="636.0" layoutY="150.0" text="Space Puzzle" />
-      <Button fx:id="btnLoadImage" layoutX="827.0" layoutY="810.0" mnemonicParsing="false" onAction="#onClickBtnSelectImage" text="ZAPOČNI IGRU" />
+      <Label fx:id="homeTitle" layoutX="627.0" layoutY="150.0" text="Space Puzzle" />
+      <Button fx:id="btnLoadImage" layoutX="752.0" layoutY="834.0" mnemonicParsing="false" onAction="#onClickBtnSelectImage" stylesheets="@style.css" text="ZAPOČNI IGRU" />
    </children>
 </Pane>

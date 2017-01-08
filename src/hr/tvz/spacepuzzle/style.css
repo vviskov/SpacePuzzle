@@ -1,25 +1,31 @@
 #homeScreen {
-	-fx-background-color: #8c0a91;
+	-fx-background-image: url("img1.jpg");
+    -fx-background-repeat: stretch;
+}
+
+#imageGalleryPane, #mainPane {
+    -fx-background-color: #F0E3C2;
 }
 
 #homeTitle {
-	-fx-text-fill: #fff;
+	-fx-text-fill: #564576;
 	-fx-font-size: 110px;
 	-fx-font-weight: bold;
 }
 
-#btnEasy, #btnMedium, #btnHard {
+#btnLoadImage, #btnEasy, #btnMedium, #btnHard {
 	-fx-font-size: 50px;
-	-fx-padding: 10px 20px;
-	-fx-background-color: #8c0a91;
-	-fx-text-fill: #fff;
+	-fx-padding: 10px 30px;
+	-fx-background-color: #564576;
+	-fx-text-fill: #FFF8E7;
 	-fx-font-weight: bold;
 }
 
-#btnLoadImage {
-	-fx-font-size: 40px;
-	-fx-padding: 10px 20px;
-	-fx-background-color: #fff;
+#btnSoundMute, #btnReturn {
+	-fx-font-size: 25px;
+	-fx-padding: 10px 15px;
+	-fx-background-color: #564576;
+	-fx-text-fill: #FFF8E7;
 	-fx-font-weight: bold;
 }
 

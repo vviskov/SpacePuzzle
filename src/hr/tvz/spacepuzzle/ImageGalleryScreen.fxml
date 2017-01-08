@@ -11,8 +11,8 @@
       <ListView fx:id="imageBrowser" layoutX="1320.0" prefHeight="1080.0" prefWidth="600.0" stylesheets="@style.css" />
       <ImageView fx:id="imagePreview" fitHeight="720.0" fitWidth="1200.0" layoutX="60.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true" />
 
-      <Button fx:id="btnEasy" alignment="CENTER" contentDisplay="CENTER" layoutX="530.0" layoutY="930.0" mnemonicParsing="false" onAction="#onClickBtnMediumStart" text="SREDNJE" textAlignment="CENTER" />
-      <Button fx:id="btnMedium" alignment="CENTER" contentDisplay="CENTER" layoutX="100.0" layoutY="930.0" mnemonicParsing="false" onAction="#onClickBtnEasyStart" text="LAGANO" textAlignment="CENTER" />
-      <Button fx:id="btnHard" alignment="CENTER" contentDisplay="CENTER" layoutX="1000.0" layoutY="930.0" mnemonicParsing="false" onAction="#onClickBtnHardStart" text="TEŠKO" textAlignment="CENTER" />
+      <Button fx:id="btnEasy" alignment="CENTER" contentDisplay="CENTER" layoutX="551.0" layoutY="904.0" mnemonicParsing="false" onAction="#onClickBtnMediumStart" text="SREDNJE" textAlignment="CENTER" />
+      <Button fx:id="btnMedium" alignment="CENTER" contentDisplay="CENTER" layoutX="160.0" layoutY="904.0" mnemonicParsing="false" onAction="#onClickBtnEasyStart" text="LAGANO" textAlignment="CENTER" />
+      <Button fx:id="btnHard" alignment="CENTER" contentDisplay="CENTER" layoutX="946.0" layoutY="904.0" mnemonicParsing="false" onAction="#onClickBtnHardStart" text="TEŠKO" textAlignment="CENTER" />
    </children>
 </Pane>
