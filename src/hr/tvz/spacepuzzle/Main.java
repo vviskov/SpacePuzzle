@@ -1,5 +1,7 @@
 package hr.tvz.spacepuzzle;
 
+import hr.tvz.spacepuzzle.controller.HomeController;
+import hr.tvz.spacepuzzle.util.ResourceLoader;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,7 +14,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("Space Puzzle");
-        FXMLLoader myLoader = new FXMLLoader(getClass().getResource("HomeScreen.fxml"));
+        FXMLLoader myLoader = ResourceLoader.loadView("HomeScreen");
         Parent root = myLoader.load();
         HomeController controller = (HomeController) myLoader.getController();
         controller.start(primaryStage);

@@ -1,6 +1,10 @@
-package hr.tvz.spacepuzzle;
+package hr.tvz.spacepuzzle.controller;
 
 
+import hr.tvz.spacepuzzle.model.ChunkInfo;
+import hr.tvz.spacepuzzle.model.DraggableImageView;
+import hr.tvz.spacepuzzle.model.PuzzlePiece;
+import hr.tvz.spacepuzzle.util.ResourceLoader;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,9 +21,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
-import java.io.File;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -52,8 +54,8 @@ public class GameController {
         this.mainStage = mainStage;
 
         try {
-            String wrongSoundUri = GameController.class.getResource("sounds/wrong.mp3").toURI().toString();
-            String correctSoundUri = GameController.class.getResource("sounds/correct.mp3").toURI().toString();
+            String wrongSoundUri = ResourceLoader.loadSound("wrong");
+            String correctSoundUri = ResourceLoader.loadSound("correct");
             wrongSound = new MediaPlayer(new Media(wrongSoundUri));
             correctSound = new MediaPlayer(new Media(correctSoundUri));
         } catch (Exception e) {
@@ -174,7 +176,7 @@ public class GameController {
 
     public void onBtnReturnHome(ActionEvent actionEvent) throws IOException {
 
-        FXMLLoader myLoader = new FXMLLoader(getClass().getResource("HomeScreen.fxml"));
+        FXMLLoader myLoader = ResourceLoader.loadView("HomeScreen");
         Parent root = myLoader.load();
         mainStage.setScene(new Scene(root, 1920, 1080));
         mainStage.show();

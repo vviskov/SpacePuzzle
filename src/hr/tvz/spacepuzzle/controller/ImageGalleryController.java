@@ -1,25 +1,21 @@
-package hr.tvz.spacepuzzle;
+package hr.tvz.spacepuzzle.controller;
 
 
+import hr.tvz.spacepuzzle.model.ImageWithPath;
+import hr.tvz.spacepuzzle.util.ResourceLoader;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TextArea;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.image.PixelReader;
-import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -28,7 +24,6 @@ import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -60,11 +55,12 @@ public class ImageGalleryController {
         }
         String imagePath = image.getURL();
 
-        FXMLLoader myLoader = new FXMLLoader(getClass().getResource("GameScreen.fxml"));
+        FXMLLoader myLoader = ResourceLoader.loadView("GameScreen");
         Parent root = myLoader.load();
         mainStage.setScene(new Scene(root, 1920, 1080));
         mainStage.show();
-        GameController controller = (GameController) myLoader.getController();
+
+        GameController controller = myLoader.getController();
         controller.setNumCols(cols);
         controller.setNumRows(rows);
         controller.start(mainStage, imagePath);
@@ -89,6 +85,10 @@ public class ImageGalleryController {
 
         final List<Path> files=new ArrayList<>();
         try {
+            final File imageFolder = new File(IMAGE_FOLDER_PATH);
+            if(!imageFolder.exists()){
+                imageFolder.mkdir();
+            }
             Files.walkFileTree(Paths.get(IMAGE_FOLDER_PATH), new SimpleFileVisitor<Path>(){
                 @Override
                 public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {

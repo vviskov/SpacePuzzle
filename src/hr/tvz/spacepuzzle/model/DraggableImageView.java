@@ -1,14 +1,8 @@
 
-package hr.tvz.spacepuzzle;
+package hr.tvz.spacepuzzle.model;
 
 import javafx.application.Platform;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.Dragboard;
-import javafx.scene.input.TransferMode;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
 
 /**
  * Created by valentina on 1.6.2016..

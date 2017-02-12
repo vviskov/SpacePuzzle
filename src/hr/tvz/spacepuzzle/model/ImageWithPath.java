@@ -1,4 +1,4 @@
-package hr.tvz.spacepuzzle;
+package hr.tvz.spacepuzzle.model;
 
 import javafx.scene.image.Image;
 
