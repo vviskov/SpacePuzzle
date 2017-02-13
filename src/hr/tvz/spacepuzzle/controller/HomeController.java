@@ -13,8 +13,6 @@ import java.io.IOException;
 
 public class HomeController {
 
-    @FXML
-    private Button btnStart;
     private Stage mainStage;
 
     public void start(Stage mainStage) {
@@ -22,7 +20,6 @@ public class HomeController {
     }
 
     public void onClickBtnSelectImage(ActionEvent actionEvent) throws IOException {
-
         FXMLLoader myLoader = ResourceLoader.loadView("ImageGalleryScreen");
         Parent root = myLoader.load();
 

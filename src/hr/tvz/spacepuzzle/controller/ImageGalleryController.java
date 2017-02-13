@@ -34,12 +34,24 @@ public class ImageGalleryController {
     private static final List<String> ALLOWED_FILES_EXTENSIONS = Arrays.asList(".png", ".jpg", ".jpeg");
 
     @FXML
-    public ListView imageBrowser;
+    public ListView<String> imageBrowser;
 
     @FXML
     public ImageView imagePreview;
-    private ObservableList<String> items;
+
     private Stage mainStage;
+
+    public void onClickBtnEasyStart(ActionEvent actionEvent) throws IOException {
+        startGame(3, 3);
+    }
+
+    public void onClickBtnMediumStart(ActionEvent actionEvent) throws IOException {
+        startGame(4, 4);
+    }
+
+    public void onClickBtnHardStart(ActionEvent actionEvent) throws IOException {
+        startGame(5, 5);
+    }
 
     public void startGame(int cols, int rows) throws IOException {
 
@@ -61,24 +73,8 @@ public class ImageGalleryController {
         mainStage.show();
 
         GameController controller = myLoader.getController();
-        controller.setNumCols(cols);
-        controller.setNumRows(rows);
-        controller.start(mainStage, imagePath);
-
+        controller.start(mainStage, imagePath, cols, rows);
     }
-
-    public void onClickBtnEasyStart(ActionEvent actionEvent) throws IOException {
-        startGame(3, 3);
-    }
-
-    public void onClickBtnMediumStart(ActionEvent actionEvent) throws IOException {
-        startGame(4, 4);
-    }
-
-    public void onClickBtnHardStart(ActionEvent actionEvent) throws IOException {
-        startGame(5, 5);
-    }
-
 
     public void start(Stage mainStage) {
         this.mainStage=mainStage;
@@ -115,22 +111,14 @@ public class ImageGalleryController {
     }
 
     private void createListView(List<String> files) {
-
-        items = FXCollections.observableArrayList(files);
-        imageBrowser.setItems(items);
-        imageBrowser.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                String selectedImageURI = (String) imageBrowser.getSelectionModel().getSelectedItem();
-                ImageWithPath image = new ImageWithPath(selectedImageURI);
-                imagePreview.setImage(image);
-                imagePreview.setFitWidth(1200);
-                imagePreview.setFitHeight(720);
-            }
+        imageBrowser.setItems(FXCollections.observableArrayList(files));
+        imageBrowser.setOnMouseClicked(event -> {
+            String selectedImageURI = imageBrowser.getSelectionModel().getSelectedItem();
+            imagePreview.setImage(new ImageWithPath(selectedImageURI));
+            imagePreview.setFitWidth(1200);
+            imagePreview.setFitHeight(720);
         });
         imageBrowser.setCellFactory(listView -> new ListCell<String>() {
-            private ImageView imageView = new ImageView();
-
             @Override
             public void updateItem(String filePath, boolean empty) {
                 super.updateItem(filePath, empty);
@@ -138,11 +126,8 @@ public class ImageGalleryController {
                     setText(null);
                     setGraphic(null);
                 } else {
-                    ImageWithPath image = new ImageWithPath(filePath);
-                    imageView.setImage(image);
-                    imageView.setFitWidth(560);
-                    imageView.setFitHeight(315);
-                    setGraphic(imageView);
+                    setText(null);
+                    setGraphic(ImageWithPath.Builder.create(filePath).withSize(560, 315).build());
                 }
             }
         });

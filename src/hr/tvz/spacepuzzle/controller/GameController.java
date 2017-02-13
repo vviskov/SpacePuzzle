@@ -50,8 +50,10 @@ public class GameController {
     private MediaPlayer correctSound;
     private Stage mainStage;
 
-    public void start(Stage mainStage, String imagePath) {
+    public void start(Stage mainStage, String imagePath, int cols, int rows) {
         this.mainStage = mainStage;
+        this.numCols = cols;
+        this.numRows = rows;
 
         try {
             String wrongSoundUri = ResourceLoader.loadSound("wrong");
@@ -64,7 +66,6 @@ public class GameController {
         }
 
         Image originalImage = new Image(imagePath);
-        //Image originalImage = new Image("http://www.unoosa.org/res/timeline/index_html/space-2.jpg");
         mainImage.setImage(originalImage);
 
         mainGrid.setGridLinesVisible(true);
@@ -140,13 +141,12 @@ public class GameController {
 
     private void addPane(int colIndex, int rowIndex, int numCols) {
         Pane pane = new Pane();
-        pane.setMaxSize(1200/numCols, 720/numRows);
+        pane.setMaxSize(1200/numCols, 720/numCols);
         pane.setMinSize(1200/numCols, 720/numRows);
         pane.setOnMouseEntered(e -> {
             PuzzlePiece piece = ChunkInfo.activePiece;
             DraggableImageView activeImage = ChunkInfo.activeImageView;
             if (piece != null) {
-//                System.out.printf("Mouse enetered cell [%d, %d], %d %n", colIndex, rowIndex, piece.getPosition());
                 if(piece.getPosition() == (rowIndex * numCols + colIndex)) {
                     pane.getChildren().add(piece.createImageView());
                     ((Group) activeImage.getParent()).getChildren().remove(activeImage);
@@ -166,21 +166,12 @@ public class GameController {
         mainGrid.add(pane, colIndex, rowIndex);
     }
 
-    public void setNumCols(int numCols) {
-        this.numCols = numCols;
-    }
-
-    public void setNumRows(int numRows) {
-        this.numRows = numRows;
-    }
-
     public void onBtnReturnHome(ActionEvent actionEvent) throws IOException {
-
         FXMLLoader myLoader = ResourceLoader.loadView("HomeScreen");
         Parent root = myLoader.load();
         mainStage.setScene(new Scene(root, 1920, 1080));
         mainStage.show();
-        HomeController controller = (HomeController) myLoader.getController();
+        HomeController controller = myLoader.getController();
         controller.start(mainStage);
     }
 }
